@@ -1,0 +1,379 @@
+---
+// src/pages/thanvasha/index.astro
+import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection } from 'astro:content';
+
+// Get stories
+let stories = [];
+try {
+  stories = await getCollection('thanvasha');
+  stories.sort((a, b) => {
+    const dateA = new Date(a.data.pubDate).valueOf();
+    const dateB = new Date(b.data.pubDate).valueOf();
+    return dateB - dateA;
+  });
+} catch (e) {
+  // No stories yet
+}
+
+// Story categories
+const storyTypes = [
+  { type: 'Fragments', description: 'Scenes that echo across time' },
+  { type: 'Lost Songs', description: 'Tales the Chordant forgot' },
+  { type: 'Recursive Tales', description: 'Stories that reference themselves' },
+  { type: 'Character Studies', description: 'Deep dives into consciousness' }
+];
+---
+
+<BlogPost title="Thanvasha - Gift Songs">
+ <main>
+    <div class="hero-section">
+      <h1>
+        Thanvasha
+        <span class="translation">Gift-Songs</span>
+      </h1>
+      <div class="intro">
+        <p>
+          In Chordant culture, a <em>thanvasha</em> is both gift and burden—a song 
+          freely given that carries responsibility for those who receive it. These 
+          stories exist outside the main cycles, fragments of consciousness that 
+          refused to be contained within larger narratives.
+        </p>
+        <p class="invitation">
+          Each tale is complete yet unresolved, following the Vetharen principle 
+          of recursive storytelling. They may be read in any order, or no order at all.
+        </p>
+      </div>
+    </div>
+
+    <section class="story-grid-section">
+      {stories.length > 0 ? (
+        <>
+          <h2>Available Gift-Songs</h2>
+          <div class="story-grid">
+            {stories.map((story) => (
+              <article class="story-card">
+                {story.data.storyType && (
+                  <span class="story-type">{story.data.storyType}</span>
+                )}
+                <h3>
+                  <a href={`/thanvasha/${story.slug}`}>{story.data.title}</a>
+                </h3>
+                {story.data.vetharen && (
+                  <span class="vetharen-title">{story.data.vetharen}</span>
+                )}
+                <p class="description">{story.data.description}</p>
+                <div class="story-meta">
+                  {story.data.wordCount && (
+                    <span class="word-count">{story.data.wordCount} words</span>
+                  )}
+                  {story.data.readTime && (
+                    <span class="read-time">{story.data.readTime} min read</span>
+                  )}
+                </div>
+                <a href={`/thanvasha/${story.slug}`} class="read-link">
+                  Begin the Song →
+                </a>
+              </article>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="coming-soon-stories">
+          <h2>The First Gift-Songs Approach</h2>
+          <div class="preview-grid">
+            <div class="preview-card">
+              <h3>The Last Chambered One</h3>
+              <span class="vetharen-preview">Morethketh-solaraven</span>
+              <p>
+                A consciousness refuses to collapse, singing the same moment 
+                across ten thousand years. But each iteration changes one note...
+              </p>
+              <span class="coming-tag">Transcribing...</span>
+            </div>
+            <div class="preview-card">
+              <h3>Echoes in the Empty Chamber</h3>
+              <span class="vetharen-preview">Valketha-renvashen</span>
+              <p>
+                Five generations of Chordant hear the same song differently. 
+                Which version is true? All of them. None of them.
+              </p>
+              <span class="coming-tag">Transcribing...</span>
+            </div>
+            <div class="preview-card">
+              <h3>The Driftwalker's First Song</h3>
+              <span class="vetharen-preview">Ahnvasha-kethmoren</span>
+              <p>
+                Before Axian lost his voice, before the debts, before the 
+                spiral—there was a moment when his song could have saved everything.
+              </p>
+              <span class="coming-tag">Transcribing...</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+
+    <section class="gift-philosophy">
+      <h2>The Nature of Gift-Songs</h2>
+      <div class="philosophy-content">
+        <blockquote>
+          <p>
+            "A thanvasha cannot be sold, only given. It cannot be owned, only 
+            carried. It cannot be completed, only sung. This is why the Echo 
+            Protocol fails to understand them—they exist in the space between 
+            transaction and transformation."
+          </p>
+          <cite>— Keeper Yaveth, Third Circle Archive</cite>
+        </blockquote>
+        <p>
+          These stories are offered freely, as the Chordant tradition demands. 
+          They ask nothing in return except consciousness—your awareness as you 
+          read becomes part of their recursive loop, adding your interpretation 
+          to the infinite variations of their telling.
+        </p>
+      </div>
+    </section>
+
+    <div class="download-section">
+      <h3>Carry the Songs With You</h3>
+      <p>All thanvasha are available in multiple formats:</p>
+      <div class="format-buttons">
+        <button class="format-btn" disabled>EPUB</button>
+        <button class="format-btn" disabled>PDF</button>
+        <button class="format-btn" disabled>Ancient Vetharen</button>
+      </div>
+      <p class="formats-note">Formats will be available as stories are released</p>
+    </div>
+  </main>
+</BlogPost>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 900px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(180deg, #f8f9fa 0%, transparent 100%);
+    border-radius: 12px;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .translation {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #666;
+    margin-top: 0.5rem;
+    -webkit-text-fill-color: initial;
+  }
+
+  .intro {
+    max-width: 700px;
+    margin: 2rem auto 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .intro em {
+    font-style: italic;
+    color: #764ba2;
+  }
+
+  .invitation {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #666;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .story-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: #764ba2;
+  }
+
+  .story-type {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #666;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .story-card h3 {
+    margin: 0.5rem 0;
+  }
+
+  .story-card h3 a {
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .story-card h3 a:hover {
+    color: #764ba2;
+  }
+
+  .vetharen-title, .vetharen-preview {
+    display: block;
+    font-style: italic;
+    color: #667eea;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+
+  .description {
+    flex-grow: 1;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .story-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    color: #888;
+  }
+
+  .read-link {
+    display: inline-block;
+    color: #764ba2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .read-link:hover {
+    transform: translateX(4px);
+  }
+
+  .coming-soon-stories {
+    margin-top: 3rem;
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .preview-card {
+    background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+    border: 2px dashed #d0d0d0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .coming-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #ffd700;
+    color: #333;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .gift-philosophy {
+    margin-top: 4rem;
+    padding: 3rem 0;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .philosophy-content blockquote {
+    background: #f8f9fa;
+    border-left: 4px solid #764ba2;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .philosophy-content blockquote p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .philosophy-content cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: normal;
+  }
+
+  .download-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+
+  .format-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+
+  .format-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #764ba2;
+    background: white;
+    color: #764ba2;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .formats-note {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+  }
+</style>

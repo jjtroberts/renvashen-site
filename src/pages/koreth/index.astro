@@ -1,0 +1,468 @@
+---
+// src/pages/koreth/index.astro
+import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection } from 'astro:content';
+
+// Get community posts
+let communityPosts = [];
+try {
+  communityPosts = await getCollection('koreth');
+  communityPosts.sort((a, b) => {
+    const dateA = new Date(a.data.pubDate).valueOf();
+    const dateB = new Date(b.data.pubDate).valueOf();
+    return dateB - dateA;
+  });
+} catch (e) {
+  // No posts yet
+}
+
+// Community sections
+const communityAreas = [
+  {
+    title: 'Reader Interpretations',
+    vetharen: 'Kelvasha',
+    description: 'Your songs become part of the story',
+    icon: '🎵'
+  },
+  {
+    title: 'Language Workshop',
+    vetharen: 'Vetharen-kethum',
+    description: 'Learn and create in Ancient Vetharen',
+    icon: '📜'
+  },
+  {
+    title: 'Theory Discussions',
+    vetharen: 'Mathketh',
+    description: 'Explore consciousness and time',
+    icon: '🌀'
+  },
+  {
+    title: 'Fan Creations',
+    vetharen: 'Thankoreth',
+    description: 'Art, music, and recursive tales',
+    icon: '🎨'
+  }
+];
+---
+
+<BlogPost title="Koreth - Community">
+  <main>
+    <div class="hero-section">
+      <h1>
+        Koreth
+        <span class="translation">The Community Consciousness</span>
+      </h1>
+      <div class="intro">
+        <p>
+          <em>Koreth</em> in Ancient Vetharen means more than community—it represents 
+          the collective consciousness that emerges when individual songs harmonize. 
+          Here, readers become singers, interpreters become creators, and every 
+          interaction adds a new layer to the recursive narrative.
+        </p>
+        <p class="philosophy">
+          "We are not readers but singers, not audience but chorus. Every 
+          interpretation changes the song." — The First Principle of Koreth
+        </p>
+      </div>
+    </div>
+
+    <section class="community-areas">
+      <h2>Join the Collective Song</h2>
+      <div class="area-grid">
+        {communityAreas.map(area => (
+          <div class="area-card">
+            <span class="area-icon">{area.icon}</span>
+            <h3>{area.title}</h3>
+            <span class="vetharen-name">{area.vetharen}</span>
+            <p>{area.description}</p>
+            <button class="join-btn" disabled>Coming Soon</button>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="reader-songs">
+      <h2>Recent Voices from the Koreth</h2>
+      
+      {communityPosts.length > 0 ? (
+        <div class="posts-grid">
+          {communityPosts.slice(0, 6).map((post) => (
+            <article class="community-post">
+              <div class="post-header">
+                {post.data.author && (
+                  <span class="author">by {post.data.author}</span>
+                )}
+                {post.data.type && (
+                  <span class="post-type">{post.data.type}</span>
+                )}
+              </div>
+              <h3>
+                <a href={`/koreth/${post.slug}`}>{post.data.title}</a>
+              </h3>
+              <p>{post.data.description}</p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="community-preview">
+          <div class="preview-message">
+            <h3>The Koreth Awakens Soon</h3>
+            <p>
+              When the first readers complete their journey through the memory-songs, 
+              this space will bloom with interpretations, theories, and new creations. 
+              The community features are being carefully crafted to encourage meaningful 
+              participation while respecting the recursive nature of the narrative.
+            </p>
+          </div>
+          
+          <div class="upcoming-features">
+            <h3>Planned Community Features</h3>
+            <ul>
+              <li>
+                <strong>Interpretation Threads:</strong> Share how you understand 
+                the recursive elements and unresolved passages
+              </li>
+              <li>
+                <strong>Vetharen Workshop:</strong> Learn the ancient language, 
+                create your own words following linguistic rules
+              </li>
+              <li>
+                <strong>Song Submissions:</strong> Write your own thanvasha 
+                (gift-songs) within the universe
+              </li>
+              <li>
+                <strong>Theory Garden:</strong> Collaborative space for exploring 
+                the deeper mysteries of consciousness and time
+              </li>
+              <li>
+                <strong>Reading Circles:</strong> Synchronized group readings with 
+                discussion of each spiral through the narrative
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </section>
+
+    <section class="join-section">
+      <div class="join-card">
+        <h2>Become Part of the Song</h2>
+        <p>
+          The Koreth is more than a community—it's a living experiment in 
+          collective storytelling. Your interpretations literally become part 
+          of the narrative fabric.
+        </p>
+        <form class="newsletter-form">
+          <input 
+            type="email" 
+            placeholder="Enter your resonance coordinates (email)"
+            class="email-input"
+            required
+          />
+          <button type="submit" class="submit-btn">Join the Koreth</button>
+        </form>
+        <p class="privacy-note">
+          Your consciousness signature (email) will only be used for Koreth 
+          communications. We respect the sacred boundary of individual awareness.
+        </p>
+      </div>
+    </section>
+
+    <section class="community-principles">
+      <h2>The Five Principles of Koreth</h2>
+      <ol class="principles-list">
+        <li>
+          <strong>Every reading is a performance:</strong> Your interpretation 
+          changes the meaning
+        </li>
+        <li>
+          <strong>No song is ever complete:</strong> All narratives remain 
+          open to revision
+        </li>
+        <li>
+          <strong>Consciousness is collective:</strong> We think together, 
+          not in isolation
+        </li>
+        <li>
+          <strong>Time is recursive:</strong> Past discussions influence 
+          future readings
+        </li>
+        <li>
+          <strong>The gift must flow:</strong> What you receive, you must 
+          transform and give again
+        </li>
+      </ol>
+    </section>
+  </main>
+</BlogPost>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 900px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #f5f3ff 0%, #e8e6ff 100%);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #4a3d8c;
+  }
+
+  .translation {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+
+  .intro {
+    max-width: 700px;
+    margin: 2rem auto 0;
+  }
+
+  .intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .intro em {
+    font-style: italic;
+    color: #6b5b95;
+  }
+
+  .philosophy {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    font-style: italic;
+    color: #6b5b95;
+  }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .area-card {
+    background: white;
+    border: 2px solid #e8e6ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .area-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(107,91,149,0.15);
+    border-color: #6b5b95;
+  }
+
+  .area-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .area-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .vetharen-name {
+    display: block;
+    font-style: italic;
+    color: #6b5b95;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .area-card p {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .join-btn {
+    background: #6b5b95;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .reader-songs {
+    margin: 4rem 0;
+  }
+
+  .community-preview {
+    background: linear-gradient(135deg, rgba(107,91,149,0.05) 0%, rgba(107,91,149,0.1) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .preview-message {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .upcoming-features {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .upcoming-features ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .upcoming-features li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e8e6ff;
+  }
+
+  .upcoming-features li:last-child {
+    border-bottom: none;
+  }
+
+  .upcoming-features strong {
+    color: #6b5b95;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .join-section {
+    margin: 4rem 0;
+  }
+
+  .join-card {
+    background: linear-gradient(135deg, #6b5b95 0%, #4a3d8c 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .join-card h2 {
+    margin-top: 0;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .submit-btn {
+    background: white;
+    color: #6b5b95;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .privacy-note {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin: 1rem auto 0;
+  }
+
+  .community-principles {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e8e6ff;
+  }
+
+  .principles-list {
+    counter-reset: principles;
+    list-style: none;
+    padding: 0;
+  }
+
+  .principles-list li {
+    counter-increment: principles;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: #f8f7ff;
+    border-left: 3px solid #6b5b95;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .principles-list li::before {
+    content: counter(principles);
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #6b5b95;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .principles-list strong {
+    color: #6b5b95;
+  }
+
+  @media (max-width: 720px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .hero-section {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

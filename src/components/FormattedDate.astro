@@ -1,17 +1,25 @@
 ---
-interface Props {
-	date: Date;
+// src/components/FormattedDate.astro
+export interface Props {
+  date: Date | string | undefined;
 }
 
 const { date } = Astro.props;
+
+// Handle missing dates gracefully
+if (!date) {
+  return null;
+}
+
+const dateObj = typeof date === 'string' ? new Date(date) : date;
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
-</time>
+{date && (
+  <time datetime={dateObj.toISOString()}>
+    {dateObj.toLocaleDateString('en-us', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })}
+  </time>
+)}

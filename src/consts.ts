@@ -1,5 +1,20 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
+// src/consts.ts
+export const SITE_TITLE = 'Renvashen - Where Memory Becomes Song';
+export const SITE_DESCRIPTION = 'Enter a world where consciousness shapes reality, time spirals rather than flows, and every story is a memory-song waiting to be sung.';
+export const SITE_URL = 'https://renvashen.com';
+export const SITE_AUTHOR = 'Your Name'; // Update this
+export const SITE_LANG = 'en';
 
-export const SITE_TITLE = 'Astro Blog';
-export const SITE_DESCRIPTION = 'Welcome to my website!';
+// Social links (update with your actual links)
+export const SOCIAL = {
+  twitter: 'https://twitter.com/yourusername',
+  github: 'https://github.com/yourusername',
+  email: 'hello@renvashen.com'
+};
+
+// Vetharen terms for site-wide use
+export const VETHAREN = {
+  siteTitle: 'Renvashen',
+  tagline: 'Kethara vashaven soleth',
+  press: 'Tharsolketha Press'
+};

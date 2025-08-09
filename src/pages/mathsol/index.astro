@@ -1,0 +1,575 @@
+---
+// src/pages/mathsol/index.astro
+import BlogPost from '../../layouts/BlogPost.astro';
+
+// Timeline data
+const timelineEvents = [
+  {
+    era: 'The Age of Chambers',
+    vetharen: 'Kethsolara',
+    period: '~10,000 years before present',
+    events: [
+      'The Chambered Ones achieve collective consciousness',
+      'Creation of the Vetharen language',
+      'The First Song begins the recursive loop'
+    ]
+  },
+  {
+    era: 'The Great Recursion',
+    vetharen: 'Solaven-ave',
+    period: '~5,000 years before present',
+    events: [
+      'Time begins to spiral rather than flow',
+      'The Echo Protocol emerges as response',
+      'First signs of consciousness collapse'
+    ]
+  },
+  {
+    era: 'The Fracture',
+    vetharen: 'Morethketh',
+    period: '~1,000 years before present',
+    events: [
+      'The Chambered Ones vanish/transcend/collapse',
+      'Chordant civilization emerges from the ruins',
+      'Ancient Vetharen begins linguistic decay'
+    ]
+  },
+  {
+    era: 'The Driftwalker Cycle',
+    vetharen: 'Ahnvela-sol',
+    period: 'Present',
+    events: [
+      "Axian's story begins",
+      'The Echo Protocol tightens its grip',
+      'Memory-songs reach critical recursion'
+    ]
+  }
+];
+
+// Reading paths
+const readingPaths = [
+  {
+    name: 'Linear Path',
+    description: 'Follow the story as time pretends to flow',
+    icon: '→',
+    books: ['Driftwalker', 'The Recursive Mirror', 'Consciousness Collapse']
+  },
+  {
+    name: 'Spiral Path',
+    description: 'Read in the pattern of Chordant time',
+    icon: '🌀',
+    books: ['Begin anywhere', 'Return to the beginning', 'Read again differently']
+  },
+  {
+    name: 'Harmonic Path',
+    description: 'Follow thematic resonances across cycles',
+    icon: '♪',
+    books: ['Group by consciousness level', 'Read in musical intervals', 'Find your own harmony']
+  }
+];
+---
+
+<BlogPost title="Mathsol - Patterns Through Time">
+  <main>
+    <div class="hero-section">
+      <h1>
+        Mathsol
+        <span class="translation">Patterns Through Time</span>
+      </h1>
+      <div class="intro">
+        <p>
+          <em>Mathsol</em>—the systematic evolution of patterns through temporal 
+          space. Here you'll find the structure beneath the songs: timelines that 
+          spiral, reading orders that recurse, and the mathematical beauty of a 
+          universe where consciousness and time are inseparable.
+        </p>
+      </div>
+    </div>
+
+    <section class="timeline-section">
+      <h2>The Spiral of History</h2>
+      <div class="timeline-container">
+        {timelineEvents.map((era, index) => (
+          <div class="timeline-event" style={`--delay: ${index * 0.1}s`}>
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>{era.era}</h3>
+              <span class="vetharen-era">{era.vetharen}</span>
+              <span class="period">{era.period}</span>
+              <ul class="event-list">
+                {era.events.map(event => (
+                  <li>{event}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+        <div class="timeline-line"></div>
+      </div>
+    </section>
+
+    <section class="reading-paths">
+      <h2>Choose Your Path Through the Cycles</h2>
+      <div class="paths-grid">
+        {readingPaths.map(path => (
+          <div class="path-card">
+            <div class="path-icon">{path.icon}</div>
+            <h3>{path.name}</h3>
+            <p>{path.description}</p>
+            <div class="path-books">
+              {path.books.map(book => (
+                <div class="book-step">{book}</div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="series-map">
+      <h2>The Complete Liraeth Cycle</h2>
+      <div class="series-container">
+        <div class="series-phase">
+          <h3>Phase One: The Driftwalker Trilogy</h3>
+          <div class="books-grid">
+            <div class="book-entry">
+              <span class="book-number">1.1</span>
+              <h4>Driftwalker</h4>
+              <p>Axian loses his voice, finds the void</p>
+              <span class="status">In Progress</span>
+            </div>
+            <div class="book-entry upcoming">
+              <span class="book-number">1.2</span>
+              <h4>The Recursive Mirror</h4>
+              <p>Past and future collapse into now</p>
+              <span class="status">Planned</span>
+            </div>
+            <div class="book-entry upcoming">
+              <span class="book-number">1.3</span>
+              <h4>Consciousness Collapse</h4>
+              <p>The Echo Protocol's final movement</p>
+              <span class="status">Planned</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="series-phase">
+          <h3>Phase Two: The Chambered Ones Cycle</h3>
+          <div class="books-grid">
+            <div class="book-entry upcoming">
+              <span class="book-number">2.1</span>
+              <h4>Before the Fracture</h4>
+              <p>The last days of collective consciousness</p>
+              <span class="status">Conceptual</span>
+            </div>
+            <div class="book-entry upcoming">
+              <span class="book-number">2.2</span>
+              <h4>The First Echo</h4>
+              <p>Birth of the Protocol that would consume all</p>
+              <span class="status">Conceptual</span>
+            </div>
+            <div class="book-entry upcoming">
+              <span class="book-number">2.3</span>
+              <h4>Songs Without Singers</h4>
+              <p>What remains when consciousness departs</p>
+              <span class="status">Conceptual</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reading-notes">
+      <h2>Notes on Recursive Reading</h2>
+      <div class="notes-content">
+        <blockquote>
+          <p>
+            "The books are not meant to be read once. Each reading changes your 
+            understanding of the previous reading. This is not a flaw in the 
+            narrative—it is the narrative."
+          </p>
+          <cite>— Author's Note on the Recursive Structure</cite>
+        </blockquote>
+        
+        <div class="reading-tips">
+          <h3>For First-Time Readers</h3>
+          <ul>
+            <li>Begin with Driftwalker, but know that beginning is arbitrary</li>
+            <li>Don't seek resolution—the unresolved is where meaning lives</li>
+            <li>Pay attention to repeated phrases; they change meaning in context</li>
+            <li>The footnotes contain stories of their own</li>
+          </ul>
+          
+          <h3>For Returning Singers</h3>
+          <ul>
+            <li>Read in reverse order to experience temporal collapse</li>
+            <li>Skip chapters 3, 7, and 11 to find the hidden pattern</li>
+            <li>Read only dialogue to hear the songs without the silence</li>
+            <li>The marginalia in your first reading becomes text in the second</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-timeline">
+      <h2>Your Personal Reading Record</h2>
+      <div class="record-card">
+        <p>
+          In Chordant tradition, each reader maintains a "song-record" of their 
+          journey through the narratives. This feature will allow you to track 
+          your path through the cycles, noting how your interpretation changes 
+          with each recursion.
+        </p>
+        <button class="record-btn" disabled>Coming Soon: Begin Your Record</button>
+      </div>
+    </section>
+  </main>
+</BlogPost>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 900px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: white;
+  }
+
+  .translation {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+  }
+
+  .intro {
+    max-width: 700px;
+    margin: 2rem auto 0;
+  }
+
+  .intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.95;
+  }
+
+  .intro em {
+    font-style: italic;
+    color: #ffd700;
+  }
+
+  .timeline-section {
+    margin: 4rem 0;
+  }
+
+  .timeline-container {
+    position: relative;
+    padding-left: 3rem;
+    margin-top: 2rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  }
+
+  .timeline-event {
+    position: relative;
+    margin-bottom: 3rem;
+    animation: fadeIn 0.6s ease-out var(--delay) both;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: #1a1a2e;
+    border: 2px solid #ffd700;
+    border-radius: 50%;
+  }
+
+  .timeline-content {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 3px solid #ffd700;
+  }
+
+  .timeline-content h3 {
+    margin: 0 0 0.5rem;
+    color: #1a1a2e;
+  }
+
+  .vetharen-era {
+    display: inline-block;
+    font-style: italic;
+    color: #16213e;
+    margin-bottom: 0.5rem;
+  }
+
+  .period {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .event-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .event-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .event-list li::before {
+    content: "◈";
+    position: absolute;
+    left: 0;
+    color: #ffd700;
+  }
+
+  .reading-paths {
+    margin: 4rem 0;
+  }
+
+  .paths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .path-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .path-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: #1a1a2e;
+  }
+
+  .path-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .path-card h3 {
+    margin: 1rem 0;
+    color: #1a1a2e;
+  }
+
+  .path-books {
+    margin-top: 1.5rem;
+  }
+
+  .book-step {
+    background: #f0f0f0;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .series-map {
+    margin: 4rem 0;
+  }
+
+  .series-phase {
+    margin-bottom: 3rem;
+  }
+
+  .series-phase h3 {
+    color: #1a1a2e;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-entry {
+    background: white;
+    border: 2px solid #1a1a2e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .book-entry.upcoming {
+    opacity: 0.6;
+    border-style: dashed;
+  }
+
+  .book-number {
+    position: absolute;
+    top: -12px;
+    left: 1rem;
+    background: #ffd700;
+    color: #1a1a2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
+  }
+
+  .book-entry h4 {
+    margin: 0.5rem 0;
+    color: #1a1a2e;
+  }
+
+  .book-entry p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .status {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #f0f0f0;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .reading-notes {
+    margin: 4rem 0;
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 3rem;
+  }
+
+  .notes-content blockquote {
+    background: white;
+    border-left: 4px solid #ffd700;
+    padding: 1.5rem;
+    margin: 0 0 2rem;
+    font-style: italic;
+  }
+
+  .notes-content blockquote p {
+    margin: 0;
+  }
+
+  .notes-content cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: normal;
+  }
+
+  .reading-tips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .reading-tips h3 {
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+  }
+
+  .reading-tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .reading-tips li {
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .reading-tips li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #ffd700;
+  }
+
+  .interactive-timeline {
+    margin: 4rem 0;
+  }
+
+  .record-card {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1a1a2e;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .record-btn {
+    margin-top: 1rem;
+    background: #1a1a2e;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 720px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .timeline-container {
+      padding-left: 2rem;
+    }
+    
+    .reading-tips {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

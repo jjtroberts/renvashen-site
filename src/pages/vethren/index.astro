@@ -1,0 +1,58 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('vethren');
+const sortedPosts = posts.sort((a, b) => 
+  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BlogPost title="Vethren">
+  <section>
+    <h1><span class="subtitle">(Memory-Songs)</span></h1>
+    <p class="intro">Published works and series from Tharsolketha Press</p>
+    
+    <div class="series-grid">
+      <article class="series-card">
+        <h2>The Driftwalker Cycle</h2>
+        <p>A recursive tale of consciousness and collapse</p>
+        <a href="/vethren/driftwalker">Enter the Cycle →</a>
+      </article>
+      
+      <!-- Add more series as you publish -->
+    </div>
+  </section>
+</BlogPost>
+
+<style>
+  .subtitle {
+    font-size: 0.6em;
+    opacity: 0.7;
+    font-weight: normal;
+  }
+  
+  .intro {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 2em;
+  }
+  
+  .series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2em;
+  }
+  
+  .series-card {
+    padding: 1.5em;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .series-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+</style>

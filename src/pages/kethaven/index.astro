@@ -1,0 +1,427 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection } from 'astro:content';
+
+// Get posts, handling if none exist yet
+let posts = [];
+try {
+  posts = await getCollection('kethaven');
+  posts.sort((a, b) => {
+    const dateA = new Date(a.data.pubDate).valueOf();
+    const dateB = new Date(b.data.pubDate).valueOf();
+    return dateB - dateA;
+  });
+} catch (e) {
+  // No posts yet
+}
+
+// Categories for writing journey posts
+const categories = [
+  { 
+    name: 'Worldbuilding', 
+    vetharen: 'Tharsolketha',
+    description: 'Crafting consciousness-responsive worlds',
+    icon: '🌍',
+    href: '/kethaven/worldbuilding'
+  },
+  { 
+    name: 'Character Voices', 
+    vetharen: 'Kethvasha',
+    description: 'Finding the songs within characters',
+    icon: '🎭',
+    href: '/kethaven/character-voices'
+  },
+  { 
+    name: 'Language Creation', 
+    vetharen: 'Vetharen',
+    description: 'Building linguistic systems',
+    icon: '📜',
+    href: '/kethaven/language-creation'
+  },
+  { 
+    name: 'Writing Process', 
+    vetharen: 'Ahnvela',
+    description: 'The breath-journey of creation',
+    icon: '✍️',
+    href: '/kethaven/writing-process'
+  },
+  { 
+    name: 'Research Notes', 
+    vetharen: 'Renketha',
+    description: 'Memory-consciousness discoveries',
+    icon: '📚',
+    href: '/kethaven/research-notes'
+  }
+];
+---
+
+<BlogPost title="Kethaven - The Consciousness Journey">
+  <main>
+    <div class="hero-section">
+      <h1>
+        Kethaven 
+        <span class="translation">The Consciousness Journey</span>
+      </h1>
+      <p class="intro">
+        In the ancient tongue, <em>kethaven</em> means "consciousness-journey"—the path 
+        a mind takes as it explores new realms. Here, I share the journey of building 
+        worlds where memory becomes song, where time spirals rather than flows, and 
+        where every word carries the weight of collapsed civilizations.
+      </p>
+    </div>
+
+    <section class="categories">
+      <h2>Paths of Exploration</h2>
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={cat.href} class="category-card">
+            <span class="icon">{cat.icon}</span>
+            <h3>{cat.name}</h3>
+            <span class="vetharen-name">{cat.vetharen}</span>
+            <p>{cat.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="recent-posts">
+      <h2>Recent Journeys</h2>
+      
+      {posts.length > 0 ? (
+        <div class="posts-list">
+          {posts.slice(0, 5).map((post) => (
+            <article class="post-card">
+              <div class="post-meta">
+                {post.data.pubDate && (
+                  <time datetime={new Date(post.data.pubDate).toISOString()}>
+                    {new Date(post.data.pubDate).toLocaleDateString('en-us', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                )}
+                {post.data.category && (
+                  <span class="category-tag">{post.data.category}</span>
+                )}
+              </div>
+              <h3>
+                <a href={`/kethaven/${post.slug}`}>{post.data.title}</a>
+              </h3>
+              {post.data.vetharen && (
+                <span class="vetharen-subtitle">{post.data.vetharen}</span>
+              )}
+              <p>{post.data.description}</p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="coming-soon">
+          <h3>The Journey Begins Soon</h3>
+          <p>
+            The first entries in the consciousness-journey are being prepared. 
+            Initial explorations will include:
+          </p>
+          <ul class="upcoming">
+            <li>
+              <strong>Building the Vetharen Language:</strong> How to create a 
+              linguistic system that reflects consciousness-based metaphysics
+            </li>
+            <li>
+              <strong>Plotting & Scene Mapping Method:</strong> Applying proven 
+              structure to recursive storytelling
+            </li>
+            <li>
+              <strong>Writing Trauma Without Exploitation:</strong> Axian's 
+              journey through authentic suffering
+            </li>
+            <li>
+              <strong>The Music of Prose:</strong> How the Chordant's musical 
+              culture influences narrative rhythm
+            </li>
+          </ul>
+          <div class="subscribe-prompt">
+            <p>Join the journey as it unfolds:</p>
+            <a href="/koreth" class="subscribe-button">Enter the Koreth →</a>
+          </div>
+        </div>
+      )}
+    </section>
+
+    <section class="writing-philosophy">
+      <h2>The Philosophy of Kethaven</h2>
+      <blockquote class="philosophy-quote">
+        <p>
+          "In Vetharen, there is no word for 'writer'—only <em>vashkethara</em>, 
+          'one who sings consciousness.' Every story is a song, every song is a 
+          memory, and every memory shapes the field of what's possible."
+        </p>
+        <cite>— From the Tharsolketha Codex</cite>
+      </blockquote>
+      
+      <p>
+        This section chronicles not just the technical craft of writing, but the 
+        deeper journey of consciousness-exploration that speculative fiction demands. 
+        How do we build worlds that feel lived-in? How do we create languages that 
+        carry cultural memory? How do we honor the recursive nature of storytelling 
+        itself?
+      </p>
+    </section>
+  </main>
+</BlogPost>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 900px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #1a1a1a;
+  }
+
+  .translation {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    max-width: 700px;
+    margin: 2rem auto 0;
+  }
+
+  .intro em {
+    font-style: italic;
+    color: #5a67d8;
+  }
+
+  .categories {
+    margin: 3rem 0;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .category-card {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  .category-card .icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-card h3 {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 1.1rem;
+  }
+
+  .vetharen-name {
+    display: block;
+    font-style: italic;
+    color: #5a67d8;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .recent-posts {
+    margin: 3rem 0;
+  }
+
+  .posts-list {
+    margin-top: 2rem;
+  }
+
+  .post-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid #5a67d8;
+    background: #fafafa;
+    transition: all 0.2s;
+  }
+
+  .post-card:hover {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .category-tag {
+    background: #5a67d8;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+  }
+
+  .post-card h3 {
+    margin: 0.5rem 0;
+  }
+
+  .post-card h3 a {
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .post-card h3 a:hover {
+    color: #5a67d8;
+  }
+
+  .vetharen-subtitle {
+    display: inline-block;
+    font-style: italic;
+    color: #5a67d8;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .coming-soon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+  }
+
+  .coming-soon h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .upcoming {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .upcoming li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .upcoming li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .upcoming strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #ffd700;
+  }
+
+  .subscribe-prompt {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .subscribe-button {
+    display: inline-block;
+    background: white;
+    color: #764ba2;
+    padding: 0.75rem 2rem;
+    border-radius: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+
+  .subscribe-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .writing-philosophy {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .philosophy-quote {
+    background: #f8f9fa;
+    border-left: 4px solid #5a67d8;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .philosophy-quote p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .philosophy-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: normal;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 720px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .coming-soon {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
