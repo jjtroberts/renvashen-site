@@ -3,9 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "husky install",
-    "generate-search-index": "astro dev && curl http://localhost:4321/api/generate-search-index",
-    "dev": "astro dev",
+    "search": "node scripts/update-search-index.js",
+    "dev": "node scripts/update-search-index.js && astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -14,10 +13,8 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.8",
     "astro": "^5.9.0",
+    "gray-matter": "^4.0.3",
     "partytown": "^0.0.0",
     "tailwindcss": "^4.1.8"
-  },
-  "devDependencies": {
-    "husky": "^9.1.7"
   }
 }
