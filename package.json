@@ -1,5 +1,5 @@
 {
-  "name": "renvashen-site",
+  "name": "storyteller",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.3",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.2",
-    "astro": "^5.12.9",
-    "sharp": "^0.34.2"
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.8",
+    "astro": "^5.9.0",
+    "partytown": "^0.0.0",
+    "tailwindcss": "^4.1.8"
   }
 }
