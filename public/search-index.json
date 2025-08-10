@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Vethren & Renvashen: Memory-Songs and the Living Practice of Remembrance",
+    "description": "A deep dive into the Chordant concepts of vethren and renvashen—contrasting the ancient tradition of memory-songs with the living act of memory-singing.",
+    "author": "Joseph Roberts",
+    "category": "Worldbuilding",
+    "tags": ["vethren", "renvashen", "memory-songs", "memory-singing", "chordant", "language", "culture", "heritage", "worldbuilding"],
+    "featured": true,
+    "thumb": "/images/spiral-header-bg.png",
+    "large": "/images/spiral-header-bg.png",
+    "url": "/article/vethren"
+  },
+  {
+    "title": "Solving Writer’s Block: Listening to the Heart of Your Story",
+    "description": "How honest reflection, patience, and ruthless revision can turn creative frustration into breakthrough moments.",
+    "author": "Joseph Roberts",
+    "category": "Writing Craft",
+    "tags": ["writing", "creativity", "writer's block", "story development", "tharsolketha"],
+    "featured": true,
+    "thumb": "/images/steve-johnson-f2PXTJWrnrM-unsplash-writers-block.jpg",
+    "large": "/images/steve-johnson-f2PXTJWrnrM-unsplash-writers-block.jpg",
+    "url": "/article/solving-writers-block"
+  }
+]

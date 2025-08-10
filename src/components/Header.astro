@@ -8,6 +8,20 @@ const { showTitle = true } = Astro.props
 ---
 
 <header class="flex flex-col items-center mt-10 mb-8 relative">
+  
+  <form id="search-form" class="absolute top-0 left-0 mt-2 ml-2 flex items-center" role="search" onsubmit="return false;">
+    <input
+      type="search"
+      id="search-input"
+      name="q"
+      placeholder="Search..."
+      class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      autocomplete="off"
+      aria-label="Search articles"
+    />
+  </form>
+  <script src="/search.js" defer></script>
+
   <!-- Theme Toggle Button -->
   <button onclick="toggleTheme()" id="theme-toggle-button" aria-label="Toggle theme" class="absolute top-0 right-0 mt-2 mr-2 p-2 rounded-md text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors">
     <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
