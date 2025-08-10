@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "prepare": "husky install",
+    "generate-search-index": "astro dev && curl http://localhost:4321/api/generate-search-index",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
