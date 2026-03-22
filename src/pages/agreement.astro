@@ -1,0 +1,512 @@
+---
+/*
+  MANUSCRIPT CONFIDENTIALITY AGREEMENT — Signing Page
+  
+  SETUP:
+  1. Create a free account at https://formspree.io
+  2. Click "+ Add New > New Form", name it "NDA Signatures"
+  3. Copy the form endpoint ID (looks like: xyzabcde)
+  4. Replace YOUR_FORMSPREE_ID below with your actual ID
+  5. Drop this file into src/pages/ in your Astro project
+  6. The page will be available at renvashen.com/agreement
+*/
+
+const FORMSPREE_ID = "mbdzvjpy"; // <-- Replace this
+const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Manuscript Confidentiality Agreement — Tharsolketha Press</title>
+  <style>
+    :root {
+      --color-bg: #faf9f7;
+      --color-surface: #ffffff;
+      --color-text: #2c2c2c;
+      --color-text-muted: #6b6b6b;
+      --color-accent: #2c3e50;
+      --color-accent-light: #3d5a73;
+      --color-border: #ddd;
+      --color-border-light: #e8e8e8;
+      --color-success-bg: #f0faf0;
+      --color-success-border: #4a9e4a;
+      --color-success-text: #2d6a2d;
+      --font-body: Georgia, 'Times New Roman', serif;
+      --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --max-width: 680px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .page-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    .page-header .imprint {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* Agreement body */
+    .agreement-body {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: 4px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .agreement-body .preamble {
+      font-style: italic;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-border-light);
+      font-size: 0.95rem;
+    }
+
+    .agreement-body p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .agreement-body .work-title {
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .clause {
+      margin-bottom: 1.25rem;
+    }
+
+    .clause-title {
+      font-weight: 700;
+      color: var(--color-accent);
+      font-size: 0.95rem;
+    }
+
+    .clause p {
+      margin-top: 0.25rem;
+    }
+
+    /* Form */
+    .signing-section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .signing-section h2 {
+      font-size: 1.25rem;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .signing-section .instructions {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"] {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-accent-light);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 500px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* Role selector */
+    .role-options {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .role-options label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .role-options input[type="radio"] {
+      accent-color: var(--color-accent);
+    }
+
+    /* Checkbox agreement */
+    .agreement-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: 3px;
+    }
+
+    .agreement-check input[type="checkbox"] {
+      margin-top: 0.25rem;
+      accent-color: var(--color-accent);
+      flex-shrink: 0;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    .agreement-check label {
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    /* Submit */
+    .submit-btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-accent);
+      border: none;
+      border-radius: 3px;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--color-accent-light);
+    }
+
+    .submit-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    /* Success state */
+    .success-message {
+      display: none;
+      padding: 1.5rem;
+      background: var(--color-success-bg);
+      border: 1px solid var(--color-success-border);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .success-message h3 {
+      color: var(--color-success-text);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-message p {
+      color: var(--color-success-text);
+      font-size: 0.9rem;
+    }
+
+    /* Honeypot */
+    .ohnohoney { 
+      position: absolute; 
+      left: -9999px; 
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border-light);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="page-header">
+      <h1>Manuscript Confidentiality Agreement</h1>
+      <div class="imprint">Tharsolketha Press</div>
+    </header>
+
+    <section class="agreement-body">
+      <p class="preamble">
+        This Agreement concerns the unpublished manuscript titled 
+        <span class="work-title">The Driftwalker Gambit</span> 
+        and all related materials (collectively, the &ldquo;Work&rdquo;). The Work includes the 
+        manuscript text, plot details, character information, world-building elements, notes, 
+        outlines, and any other materials shared by the Author in connection with this engagement.
+      </p>
+
+      <div class="clause">
+        <span class="clause-title">1. Confidentiality.</span>
+        <p>The Recipient agrees to treat the Work as confidential. The Recipient will not 
+        disclose, discuss, summarize, or share any portion of the Work with any third party 
+        without the Author&rsquo;s prior written consent. This includes sharing content in person, 
+        online, on social media, in writing communities, or through any other medium.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">2. Permitted Use.</span>
+        <p>The Recipient may read and review the Work solely for the purpose identified below 
+        (beta reading, editing, or other agreed-upon services). The Recipient will not use any 
+        ideas, characters, plot elements, world-building concepts, or other creative content from 
+        the Work in their own projects or in any commercial capacity.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">3. No Reproduction or Distribution.</span>
+        <p>The Recipient will not copy, reproduce, photograph, screenshot, or distribute the Work 
+        in whole or in part. The Recipient will not forward, upload, or otherwise make the Work 
+        accessible to any person or platform not authorized by the Author.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">4. Return or Destruction of Materials.</span>
+        <p>Upon completion of the agreed-upon services, or upon the Author&rsquo;s request at any 
+        time, the Recipient will promptly return all copies of the Work to the Author or 
+        permanently delete all electronic copies and destroy all physical copies. The Recipient 
+        will confirm in writing that this has been done.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">5. Intellectual Property.</span>
+        <p>The Work remains the sole intellectual property of the Author. Nothing in this 
+        Agreement transfers any rights, ownership, or license to the Recipient. The Author 
+        retains all copyrights and moral rights in the Work.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">6. Reviews and Public Discussion.</span>
+        <p>After the Work is published, the Recipient may post honest reviews on retail and 
+        review platforms and discuss the published version publicly. Until publication, the 
+        Recipient will not post reviews, discuss plot details, or reference the Work publicly 
+        in any way.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">7. Duration.</span>
+        <p>The confidentiality obligations in this Agreement remain in effect until the Work is 
+        published or until the Author provides written release from these obligations, whichever 
+        comes first. Clauses 2 (Permitted Use) and 5 (Intellectual Property) survive 
+        indefinitely.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">8. Breach.</span>
+        <p>The Recipient acknowledges that a breach of this Agreement may cause irreparable harm 
+        to the Author. In the event of a breach or threatened breach, the Author may seek any 
+        available legal remedy, including injunctive relief and monetary damages.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">9. Governing Law.</span>
+        <p>This Agreement will be governed by and construed in accordance with the laws of the 
+        State of Missouri.</p>
+      </div>
+
+      <div class="clause">
+        <span class="clause-title">10. Entire Agreement.</span>
+        <p>This document constitutes the entire agreement between the parties regarding the 
+        confidentiality of the Work. Any modifications must be made in writing and agreed to 
+        by both parties.</p>
+      </div>
+    </section>
+
+    <section class="signing-section" id="signing-section">
+      <h2>Sign This Agreement</h2>
+      <p class="instructions">
+        By completing this form, you are entering into a binding agreement under the 
+        federal ESIGN Act. Your typed name, email, and timestamp serve as your electronic 
+        signature.
+      </p>
+
+      <form 
+        id="nda-form"
+        action={formAction}
+        method="POST"
+      >
+        <!-- Honeypot for spam prevention -->
+        <input type="text" name="_gotcha" class="ohnohoney" tabindex="-1" autocomplete="off" />
+
+        <!-- Hidden fields for Formspree -->
+        <input type="hidden" name="_subject" value="NDA Signature — The Driftwalker Gambit" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="full-name">Full Legal Name</label>
+            <input type="text" id="full-name" name="Full Name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="Email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sign-date">Date</label>
+            <input type="date" id="sign-date" name="Date Signed" required />
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <div class="role-options">
+              <label>
+                <input type="radio" name="Role" value="Beta Reader" required />
+                Beta Reader
+              </label>
+              <label>
+                <input type="radio" name="Role" value="Editor" />
+                Editor
+              </label>
+              <label>
+                <input type="radio" name="Role" value="Other" />
+                Other
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="agreement-check">
+          <input type="checkbox" id="agree" name="Agreement Accepted" value="Yes — I agree to all terms" required />
+          <label for="agree">
+            I have read the Manuscript Confidentiality Agreement above in its entirety. 
+            I understand and agree to all of its terms. I understand that my typed name, 
+            email address, and the timestamp of this submission constitute my legally 
+            binding electronic signature.
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn" disabled>
+          Sign Agreement
+        </button>
+      </form>
+
+      <div class="success-message" id="success-message">
+        <h3>Agreement Signed</h3>
+        <p>Thank you. A confirmation has been recorded. You will receive the manuscript 
+        and questionnaire shortly.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Enable submit only when checkbox is checked
+    const checkbox = document.getElementById('agree');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    checkbox.addEventListener('change', () => {
+      submitBtn.disabled = !checkbox.checked;
+    });
+
+    // Auto-fill today's date
+    const dateField = document.getElementById('sign-date');
+    const today = new Date().toISOString().split('T')[0];
+    dateField.value = today;
+
+    // Handle form submission via AJAX for better UX
+    const form = document.getElementById('nda-form');
+    const signingSection = document.getElementById('signing-section');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          signingSection.querySelector('h2').style.display = 'none';
+          signingSection.querySelector('.instructions').style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign Agreement';
+          alert('Something went wrong. Please try again or contact the author directly.');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign Agreement';
+        alert('Connection error. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

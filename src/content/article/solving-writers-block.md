@@ -5,7 +5,7 @@ pubDate: 2025-08-09
 author: "Joseph Roberts"
 category: "Writing Craft"
 tags: ["writing", "creativity", "writer's block", "story development", "tharsolketha"]
-featured: true
+featured: false
 thumb: "/images/steve-johnson-f2PXTJWrnrM-unsplash-writers-block.jpg"
 large: "/images/steve-johnson-f2PXTJWrnrM-unsplash-writers-block.jpg"
 ---
